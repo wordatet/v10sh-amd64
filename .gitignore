@@ -1,0 +1,8 @@
+*.o
+v10sh
+.antigravityignore
+fuzz_cntl.py
+stress.sh
+recursive_stress.sh
+valgrind_*.log
+:fix

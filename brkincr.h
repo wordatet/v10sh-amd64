@@ -1,0 +1,7 @@
+/*	@(#)brkincr.h	1.2	*/
+/*	3.0 SID #	1.1	*/
+/*
+ * Bell Telephone Laboratories
+ */
+#define BRKINCR 01000
+#define BRKMAX 04000
