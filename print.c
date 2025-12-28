@@ -19,7 +19,7 @@
 #define		BUFLEN		256
 
 static char	buffer[BUFLEN];
-static int	index = 0;
+static int	buff_idx = 0;
 char		numbuf[12];
 
 extern void	prc_buff();
@@ -155,11 +155,11 @@ prl(long n)
 void
 flushb()
 {
-	if (index)
+	if (buff_idx)
 	{
-		buffer[index] = '\0';
-		write(1, buffer, length(buffer) - 1);
-		index = 0;
+		buffer[buff_idx] = '\0';
+		prs(buffer);
+		buff_idx = 0;
 	}
 }
 
@@ -169,10 +169,10 @@ prc_buff(c)
 {
 	if (c)
 	{
-		if (index + 1 >= BUFLEN)
+		if (buff_idx + 1 >= BUFLEN)
 			flushb();
 
-		buffer[index++] = c;
+		buffer[buff_idx++] = c;
 	}
 	else
 	{
@@ -196,15 +196,13 @@ prs_buff(s)
 {
 	register int len = length(s) - 1;
 
-	if (index + len >= BUFLEN)
+	if (buff_idx + len >= BUFLEN)
 		flushb();
 
-	if (len >= BUFLEN)
-		write(1, s, len);
-	else
+	if (len < BUFLEN)
 	{
-		movstr(s, &buffer[index]);
-		index += len;
+		movstr(s, &buffer[buff_idx]);
+		buff_idx += len;
 	}
 }
 
@@ -212,7 +210,7 @@ prs_buff(s)
 void
 clear_buff()
 {
-	index = 0;
+	buff_idx = 0;
 }
 
 

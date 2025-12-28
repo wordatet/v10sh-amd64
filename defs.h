@@ -8,6 +8,7 @@
 
 
 /* error exits from various parts of shell */
+#include <compat.h>
 #include 	<sys/types.h>
 #include 	<unistd.h>
 #include 	<stdlib.h>
